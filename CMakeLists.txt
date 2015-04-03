@@ -9,7 +9,13 @@ set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION}})
 include(CPack)
 
 find_package(KF5GlobalAccel REQUIRED)
+find_package(Qt5Widgets REQUIRED)
 
-add_executable(kmidikeyboard main.cc)
-target_link_libraries(kmidikeyboard KF5::GlobalAccel)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+include_directories({Qt5Widgets_INCLUDE_DIRS})
+
+add_executable(kmidikeyboard main.cc event_filter.cc)
+target_link_libraries(kmidikeyboard KF5::GlobalAccel Qt5Widgets)
 
