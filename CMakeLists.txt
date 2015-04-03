@@ -14,8 +14,11 @@ find_package(Qt5Widgets REQUIRED)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall")
+
 include_directories({Qt5Widgets_INCLUDE_DIRS})
 
-add_executable(kmidikeyboard main.cc event_filter.cc)
+add_executable(kmidikeyboard main.cc main_window.cc)
 target_link_libraries(kmidikeyboard KF5::GlobalAccel Qt5Widgets)
 
+install(TARGETS kmidikeyboard RUNTIME DESTINATION bin/)
