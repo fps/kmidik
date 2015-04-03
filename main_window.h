@@ -50,9 +50,9 @@ struct main_window : public QWidget
 #endif
 				const float width = (float)geometry().width()/128.0f;
 				
-				//const float height = 50;// = (float)geometry().height();
+				const float height = 50;// = (float)geometry().height();
 				
-				painter.drawRect((float)key_index * width, 0, width, 50);
+				painter.drawRect((float)key_index * width, 0, width, height - 2);
 #if 0
 				
 				painter.setBrush(Qt::black);
