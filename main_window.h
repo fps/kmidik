@@ -24,6 +24,7 @@ struct main_window : public QWidget
 			m_lowest_key(60)
 		{
 			m_pressed_keys[60] = true;
+			m_pressed_keys[63] = true;
 			//! TODO: Set opaque flag since we paint every pixel anyways
 		}
 		
@@ -72,7 +73,7 @@ struct main_window : public QWidget
 						painter.setBrush(Qt::white);
 					}
 
-					painter.drawRect((float)key_index * key_width, 0.0f, key_width, key_height - range_indicator_height);
+					painter.drawRect(QRectF((float)key_index * key_width, 0.0f, key_width, key_height - range_indicator_height));
 				}
 				
 				{
@@ -87,18 +88,20 @@ struct main_window : public QWidget
 						painter.setBrush(Qt::blue);
 					}
 					
-					painter.drawRect((float)key_index * key_width, (key_height - range_indicator_height) + 1, key_width, range_indicator_height);
+					painter.drawRect(QRectF((float)key_index * key_width, (key_height - range_indicator_height) + 1, key_width, range_indicator_height));
 				}
 				
 				{
 					QPainter painter(this);
 					
-					painter.setPen(Qt::blue);
-					painter.setBrush(Qt::blue);
+					painter.setPen(Qt::gray);
+					painter.setBrush(Qt::gray);
+					
+					const float indicator_extra = 3.0f;
 					
 					if (m_pressed_keys[key_index])
 					{
-						painter.drawRect((float)key_index * key_width + 2, 2.0f, key_width - 4, (key_height - 4) - range_indicator_height);
+						painter.drawRect(QRectF((float)key_index * key_width + indicator_extra, indicator_extra, key_width - (2.0f * indicator_extra), (key_height - (2.0f * indicator_extra)) - range_indicator_height));
 					}
 				}
 			}
