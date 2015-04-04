@@ -55,7 +55,7 @@ struct main_window : public QWidget
 			
 			const float range_indicator_height = 5;
 					
-			for (size_t key_index; key_index < 128; ++key_index)
+			for (size_t key_index = 0; key_index < 128; ++key_index)
 			{
 				{
 					QPainter painter(this);
@@ -70,12 +70,7 @@ struct main_window : public QWidget
 					{
 						painter.setBrush(Qt::white);
 					}
-	#if 0
-					if (true == m_pressed_keys[key_index])
-					{
-						//painter.setBrush(Qt::red);
-					}
-	#endif
+
 					painter.drawRect((float)key_index * key_width, 0.0f, key_width, key_height - range_indicator_height);
 				}
 				
@@ -92,6 +87,15 @@ struct main_window : public QWidget
 					}
 					
 					painter.drawRect((float)key_index * key_width, (key_height - range_indicator_height) + 1, key_width, range_indicator_height);
+				}
+				
+				{
+					QPainter painter(this);
+					
+					if (m_pressed_keys[key_index])
+					{
+						
+					}
 				}
 			}
 		}
