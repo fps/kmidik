@@ -1,3 +1,4 @@
+#include <QApplication>
 #include <QObject>
 #include <QWidget>
 #include <QEvent>
@@ -27,24 +28,27 @@ struct main_window : public QWidget
 		
 		void keyPressEvent(QKeyEvent *event) override 
 		{
-			if (event->key() == Qt::Key_PageUp)
+			if (event->key() == Qt::Key_PageUp && m_lowest_key < 10 * 12)
 			{
 				m_lowest_key += 12;
 			}
 
-			if (event->key() == Qt::Key_PageDown)
+			if (event->key() == Qt::Key_PageDown && m_lowest_key > 0)
 			{
 				m_lowest_key -= 12;
 			}
 
-			//m_lowest_key %= (10 * 12);
+			if (event->key() == Qt::Key_Escape)
+			{
+				QApplication::quit();
+			}
 			
 			repaint();
 		}
 		
 		void paintEvent(QPaintEvent *event) override
 		{
-			std::cout << "." << std::endl;
+			// std::cout << "." << std::endl;
 			
 			const float key_width = (float)geometry().width()/128.0f;
 			const float key_height = (float)geometry().height();
