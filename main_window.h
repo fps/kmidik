@@ -103,15 +103,5 @@ struct main_window : public QWidget
 				}
 			}
 		}
-		
-	protected:
-		bool eventFilter(QObject *obj, QEvent *event)
-		{
-			if (event->type() == QEvent::KeyPress)
-			{
-				std::cout << "." << std::endl;
-			}
-			return true;
-		}
 };
 
