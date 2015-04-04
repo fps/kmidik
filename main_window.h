@@ -8,11 +8,14 @@
 
 #include <iostream>
 #include <vector>
+#include <map>
 
 struct main_window : public QWidget
 {
 	Q_OBJECT
 
+	std::map<int, int> m_key_map;
+	
 	std::vector<bool> m_pressed_keys;
 	
 	size_t m_lowest_key;
@@ -26,6 +29,8 @@ struct main_window : public QWidget
 			m_pressed_keys[60] = true;
 			m_pressed_keys[63] = true;
 			//! TODO: Set opaque flag since we paint every pixel anyways
+			
+			m_key_map[Qt::Key_Z] = 0;
 		}
 		
 		void keyPressEvent(QKeyEvent *event) override 
@@ -43,6 +48,11 @@ struct main_window : public QWidget
 			if (event->key() == Qt::Key_Escape)
 			{
 				QApplication::quit();
+			}
+			
+			if (m_key_map.find(event->key()) != m_key_map.end())
+			{
+				m_pressed_keys[m_lowest_key + m_key_map[event->key()]] = true;
 			}
 			
 			repaint();
