@@ -30,7 +30,30 @@ struct main_window : public QWidget
 			m_pressed_keys[63] = true;
 			//! TODO: Set opaque flag since we paint every pixel anyways
 			
-			m_key_map[Qt::Key_Z] = 0;
+			int offset = 0;
+			m_key_map[Qt::Key_Z] = offset++;
+			m_key_map[Qt::Key_S] = offset++;
+			m_key_map[Qt::Key_X] = offset++;
+			m_key_map[Qt::Key_D] = offset++;
+			m_key_map[Qt::Key_C] = offset++;
+			m_key_map[Qt::Key_V] = offset++;
+			m_key_map[Qt::Key_G] = offset++;
+			m_key_map[Qt::Key_B] = offset++;
+			m_key_map[Qt::Key_H] = offset++;
+			m_key_map[Qt::Key_N] = offset++;
+			m_key_map[Qt::Key_J] = offset++;
+			m_key_map[Qt::Key_M] = offset++;
+		}
+
+		
+		void keyReleaseEvent(QKeyEvent *event) override 
+		{
+			if (m_key_map.find(event->key()) != m_key_map.end())
+			{
+				m_pressed_keys[m_lowest_key + m_key_map[event->key()]] = false;
+			}
+			
+			repaint();
 		}
 		
 		void keyPressEvent(QKeyEvent *event) override 
