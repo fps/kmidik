@@ -23,6 +23,7 @@ struct main_window : public QWidget
 			m_pressed_keys(128, false),
 			m_lowest_key(60)
 		{
+			m_pressed_keys[60] = true;
 			//! TODO: Set opaque flag since we paint every pixel anyways
 		}
 		
@@ -92,9 +93,12 @@ struct main_window : public QWidget
 				{
 					QPainter painter(this);
 					
+					painter.setPen(Qt::blue);
+					painter.setBrush(Qt::blue);
+					
 					if (m_pressed_keys[key_index])
 					{
-						
+						painter.drawRect((float)key_index * key_width + 2, 2.0f, key_width - 4, (key_height - 4) - range_indicator_height);
 					}
 				}
 			}
