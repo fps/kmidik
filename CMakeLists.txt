@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
-project(KMidiKeyboard)
+project(KMidiK)
 set(PROJECT_VERSION 0.1)
 
 set(CMAKE_INSTALL_PREFIX /usr)
@@ -18,7 +18,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall")
 
 include_directories({Qt5Widgets_INCLUDE_DIRS})
 
-add_executable(kmidikeyboard main.cc main_window.cc)
-target_link_libraries(kmidikeyboard KF5::GlobalAccel Qt5Widgets)
+add_executable(kmidik main.cc main_window.cc)
+target_link_libraries(kmidik KF5::GlobalAccel Qt5Widgets)
 
-install(TARGETS kmidikeyboard RUNTIME DESTINATION bin/)
+install(TARGETS kmidik RUNTIME DESTINATION bin/)
