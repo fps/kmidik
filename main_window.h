@@ -1,4 +1,6 @@
 #include <QApplication>
+#pragma once
+
 #include <QObject>
 #include <QWidget>
 #include <QEvent>
@@ -137,6 +139,19 @@ struct main_window : public QWidget
 						painter.drawRect(QRectF((float)key_index * key_width + indicator_extra, indicator_extra, key_width - (2.0f * indicator_extra), (key_height - (2.0f * indicator_extra)) - range_indicator_height));
 					}
 				}
+			}
+		}
+		
+	public slots:
+		void toggle_visibility()
+		{
+			if (isVisible())
+			{
+				hide();
+			}
+			else
+			{
+				show();
 			}
 		}
 };
