@@ -24,12 +24,12 @@ struct main_window : public QWidget
 	
 	public:
 		main_window() :
-			QWidget(0, Qt::FramelessWindowHint | Qt::WindowSystemMenuHint),
+			QWidget(0, Qt::FramelessWindowHint | Qt::WindowSystemMenuHint | Qt::WindowStaysOnTopHint),
 			m_pressed_keys(128, false),
 			m_lowest_key(60)
 		{
-			m_pressed_keys[60] = true;
-			m_pressed_keys[63] = true;
+			// m_pressed_keys[60] = true;
+			// m_pressed_keys[63] = true;
 			//! TODO: Set opaque flag since we paint every pixel anyways
 			
 			int offset = 0;
@@ -52,7 +52,7 @@ struct main_window : public QWidget
 		{
 			if (m_key_map.find(event->key()) != m_key_map.end())
 			{
-				m_pressed_keys[m_lowest_key + m_key_map[event->key()]] = false;
+				key_released(m_key_map[event->key()]);
 			}
 			
 			repaint();
@@ -69,15 +69,10 @@ struct main_window : public QWidget
 			{
 				m_lowest_key -= 12;
 			}
-
-			if (event->key() == Qt::Key_Escape)
-			{
-				QApplication::quit();
-			}
 			
 			if (m_key_map.find(event->key()) != m_key_map.end())
 			{
-				m_pressed_keys[m_lowest_key + m_key_map[event->key()]] = true;
+				key_pressed(m_key_map[event->key()]);
 			}
 			
 			repaint();
@@ -132,7 +127,7 @@ struct main_window : public QWidget
 					painter.setPen(Qt::gray);
 					painter.setBrush(Qt::gray);
 					
-					const float indicator_extra = 3.0f;
+					const float indicator_extra = 2.0f;
 					
 					if (m_pressed_keys[key_index])
 					{
@@ -153,6 +148,19 @@ struct main_window : public QWidget
 			{
 				show();
 			}
+		}
+		
+		//! Relative to m_lowest_key
+		void key_pressed(size_t key)
+		{
+			m_pressed_keys[m_lowest_key + key] = true;
+			repaint();
+		}
+		
+		void key_released(size_t key)
+		{
+			m_pressed_keys[m_lowest_key + key] = false;
+			repaint();
 		}
 };
 
