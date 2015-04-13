@@ -137,6 +137,12 @@ struct main_window : public QWidget
 			}
 		}
 		
+		template<size_t k>
+		void t_key_pressed()
+		{
+			key_pressed(k);
+		}
+		
 	public slots:
 		void toggle_visibility()
 		{

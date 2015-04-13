@@ -27,6 +27,11 @@ int main(int argc, char *argv[])
 	q.setShortcut(QKeySequence::Quit);
 	QObject::connect(&q, &QAction::triggered, &app, &QApplication::quit);
 	
+	QAction k_z("Press key 0", 0);
+	k_z.setShortcut(QKeySequence::Save);
+	k_z.setObjectName("kmidik_k_z");
+	QObject::connect(&k_z, &QAction::triggered, &w, &main_window::t_key_pressed<5>);
+	
 	return app.exec();
 }
 
