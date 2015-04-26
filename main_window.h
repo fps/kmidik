@@ -24,7 +24,7 @@ struct main_window : public QWidget
 	
 	public:
 		main_window() :
-			QWidget(0, Qt::FramelessWindowHint | Qt::WindowSystemMenuHint | Qt::WindowStaysOnTopHint),
+			QWidget(0, Qt::Dialog | Qt::FramelessWindowHint | Qt::WindowSystemMenuHint | Qt::WindowStaysOnTopHint),
 			m_pressed_keys(128, false),
 			m_lowest_key(60)
 		{
